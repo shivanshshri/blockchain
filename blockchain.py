@@ -24,7 +24,19 @@ class Block:
         block_string = json.dumps(block_data, sort_keys=True).encode()
         return hashlib.sha256(block_string).hexdigest()
 
+    def mine_block(self, difficulty):
+        target = "0" * difficulty
+
+        while self.hash[:difficulty] != target:
+            self.nonce += 1
+            self.hash = self.calculate_hash()
+
+        print("Block mined!")
+        print("Hash:", self.hash)
+
+
 
 if __name__ == "__main__":
     genesis_block = Block(0, ["Genesis Block"], "0")
-    print("Block Hash:", genesis_block.hash)
+    genesis_block.mine_block(4)
+
