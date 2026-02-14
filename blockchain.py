@@ -23,3 +23,8 @@ class Block:
 
         block_string = json.dumps(block_data, sort_keys=True).encode()
         return hashlib.sha256(block_string).hexdigest()
+
+
+if __name__ == "__main__":
+    genesis_block = Block(0, ["Genesis Block"], "0")
+    print("Block Hash:", genesis_block.hash)
